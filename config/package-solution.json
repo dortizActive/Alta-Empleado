@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "altaempleado-client-side-solution",
+    "id": "6227e1b4-a075-4d3a-a630-bdc33666da59",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.16.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "altaempleado description"
+      },
+      "longDescription": {
+        "default": "altaempleado description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "altaempleado Feature",
+        "description": "The feature that activates elements of the altaempleado solution.",
+        "id": "0e76630e-7b84-4004-b460-c4e1f0d3ff99",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/altaempleado.sppkg"
+  }
+}
