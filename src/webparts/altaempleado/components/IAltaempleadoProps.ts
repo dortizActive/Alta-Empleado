@@ -1,54 +1,26 @@
 export interface IAltaempleadoProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
+  webMyNet: any;
   userDisplayName: string;
+  urlPersonal: string;
+  spHttpClient: SPHttpClient;
+  OptionDepartamento: ISelected[];
+  OptionCentros: ISelected[];
+  urlwebMyNet: string;
+  Webadasasistemas: string;
+  OptionUbicacion: ISelected[];
+  WebRRHH: string;
+  OptionModoContratacion: ISelected[];
+  OptionPuesto: ISelected[];
+  OptionCategoria: ISelected[];
+  Webadasa: string;
+  OptionEmpresas: ISelected[];
+  context: WebPartContext;
 }
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import * as React from 'react';
-import { IDepartamentos, ICentros, IUbicaciones,IModoContratacion ,IPuestos,ICategoria, IEmpresa} from './Repositories';
+import {  ISelected} from './Repositories';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
-
-export interface IAltaEmpladosProps {
-  description: string;
-  NameEmpleado: string;
-  apellidoEmpleado: string;
-  telefono: string;
-  telefonoMovil: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
-  email: string;
-  Dni: string;
-  fechaAlta: string;
-  Observaciones: string;
-  urlPersonal: string;
-  listName: string;
-  spHttpClient: SPHttpClient;
-  departamento: string;
-  OptionDepartamento: IDepartamentos[];
-  OptionCentros: ICentros[];
-  centro: string;
-  urlwebMyNet: string;
-  Webadasasistemas: string;
-  ubicacion: string;
-  OptionUbicacion: IUbicaciones[];
-  WebRRHH: string;
-  modoContratacion: string;
-  OptionModoContratacion: IModoContratacion[];
-  puesto: string;
-  OptionPuesto: IPuestos[];
-  categoria: string;
-  OptionCategoria: ICategoria[];
-  Webadasa: string;
-  OptionEmpresas: IEmpresa[];
-  empresa: string;
-  login: string;
-  idlogin:number;
-  context: any;
-}
 
 
 

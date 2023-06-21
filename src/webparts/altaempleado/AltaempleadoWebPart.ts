@@ -5,141 +5,56 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart, WebPartContext } from '@microsoft/sp-webpart-base';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+
 
 import * as strings from 'AltaEmpladosWebPartStrings';
 import AltaEmplados from './components/Altaempleado';
-import { IAltaEmpladosProps } from './components/IAltaempleadoProps';
+import { IAltaempleadoProps } from './components/IAltaempleadoProps';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { SPHttpClient } from '@microsoft/sp-http';
-import { IDepartamentos, Repositories,ICentros, IUbicaciones, IModoContratacion,IPuestos, ICategoria, IEmpresa } from './components/Repositories'
 
-export interface IAltaEmpladosWebPartProps {
-  description: string;
-  apellidoEmpleado: string;
-  telefono: string;
-  telefonoMovil: string;
-  NameEmpleado: string;
-  email: string;
-  Dni: string;
-  fechaAlta: string;
-  Observaciones:string;
-  urlPersonal: string;
-  listName: string;
-  spHttpClient: SPHttpClient;
-  departamento: string;
-  stringOptionDepartamento: string;
-  OptionDepartamento: IDepartamentos[];
-  OptionCentros: ICentros[];
-  webMyNet: string;
-  centro: string;
-  urlwebMyNet: string;
-  Webadasasistemas: string;
-  ubicacion: string;
-  OptionUbicacion: IUbicaciones[];
-  WebRRHH: string;
-  modoContratacion: string;
-  OptionModoContratacion: IModoContratacion[];
-  puesto: string;
-  OptionPuesto: IPuestos[];
-  categoria: string;
-  OptionCategoria: ICategoria[];
-  Webadasa: string;
-  OptionEmpresas: IEmpresa[];
-  empresa: string;
-  login: string;
-  idlogin: number;
-  context: WebPartContext
-}
+import {  Repositories } from './components/Repositories'
 
-export default class AltaEmpladosWebPart extends BaseClientSideWebPart<IAltaEmpladosWebPartProps> {
 
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+
+export default class AltaEmpladosWebPart extends BaseClientSideWebPart<IAltaempleadoProps> {
+
+
   public repo: Repositories;
   public render(): void {
    console.log("Aquí entro");
+   this.properties
+    
+   const element = React.createElement(AltaEmplados, {
+    webMyNet: "",
+    userDisplayName: "",
+    urlPersonal: "",
+    spHttpClient: this.properties.spHttpClient,
+    OptionDepartamento: [],
+    OptionCentros: [],
+    urlwebMyNet: this.properties.urlwebMyNet,
+    Webadasasistemas: this.properties.Webadasasistemas,
+    OptionUbicacion: [],
+    WebRRHH: this.properties.WebRRHH,
+    OptionModoContratacion:[],
+    OptionPuesto: [],
+    OptionCategoria:[],
+    Webadasa: this.properties.Webadasa,
+    OptionEmpresas: [],
+    context: this.context
+  });
+  
    
-    const element: React.ReactElement<IAltaEmpladosProps> = React.createElement(
-      AltaEmplados,
-      {
-        description: this.properties.description,
-        NameEmpleado: this.properties.NameEmpleado,
-        apellidoEmpleado: this.properties.apellidoEmpleado,
-        telefono: this.properties.telefono,
-        telefonoMovil: this.properties.telefonoMovil,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        email: this.properties.email,
-        userDisplayName: this.context.pageContext.user.displayName,
-        Dni: this.properties.Dni,
-        fechaAlta: this.properties.fechaAlta,
-        Observaciones: this.properties.Observaciones,
-        urlPersonal: this.properties.urlPersonal,
-        listName: this.properties.listName,
-        spHttpClient: this.context.spHttpClient,
-        departamento: this.properties.departamento,
-        OptionDepartamento: this.properties.OptionDepartamento,
-        OptionCentros: this.properties.OptionCentros,
-        centro: this.properties.centro,
-        urlwebMyNet: this.properties.urlwebMyNet,
-        Webadasasistemas: this.properties.Webadasasistemas,
-        OptionUbicacion: this.properties.OptionUbicacion,
-        ubicacion: this.properties.ubicacion,
-        WebRRHH: this.properties.WebRRHH,
-        OptionModoContratacion: this.properties.OptionModoContratacion,
-        modoContratacion: this.properties.modoContratacion,
-        OptionPuesto: this.properties.OptionPuesto,
-        puesto: this.properties.puesto,
-        OptionCategoria: this.properties.OptionCategoria,
-        categoria: this.properties.categoria,
-        Webadasa: this.properties.Webadasa,
-        OptionEmpresas: this.properties.OptionEmpresas,
-        empresa: this.properties.empresa,
-        login: this.properties.login,
-        context: this.context,
-        idlogin: this.properties.idlogin
-        
-        
-        
-      }
-      
-    );
-   
-      console.log("Propiedades");
+      console.log("Propiedades nuevo");
       console.log(this.properties);
-      console.log(this.properties.urlPersonal);
-      console.log(this.properties.urlwebMyNet);
     //this.prop.urlPersonal = this.properties.urlPersonal;
-    this.repo=new Repositories(this.context, this.properties);
+  
    
     console.log("Entro Promise");
-    Promise.all([
-     
-      this.repo.getCentros(),
-      this.repo.getUbicación(),
-      this.repo.getPuesto(),
-      this.repo.getCategoria(),
-      this.repo.getDepartamentos(),
-      this.repo.getEmpresa()
-    ])
-      .then(results => {
-        console.log("Entro Promise result");
-        this.properties.OptionCentros = results[0];
-        this.properties.OptionUbicacion = results[1];
-        this.properties.OptionPuesto = results[2];
-        this.properties.OptionCategoria = results[3];
-        this.properties.OptionDepartamento = results[4];
-        this.properties.OptionEmpresas = results[5];
-        ReactDom.render(element, this.domElement);
-      })
-      .catch(error => {
-        console.log("Entro Promise result");
-        console.error(error);
-      });
+   
+    ReactDom.render(element, this.domElement);
+   
 
      
   }
@@ -149,7 +64,7 @@ export default class AltaEmpladosWebPart extends BaseClientSideWebPart<IAltaEmpl
   protected onInit(): Promise<void> {
     console.log("Entro en esto onInit");
     return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+      console.log(message);
     });
   }      
 
@@ -182,25 +97,7 @@ export default class AltaEmpladosWebPart extends BaseClientSideWebPart<IAltaEmpl
     return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
   }
 
-  protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-    console.log("Entro en onThemeChanged");
-    if (!currentTheme) {
-      return;
-    }
-
-    this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
-    if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
-    }
-
-    
-  }
+  
 
   public  OnHandle_Cancelar(){
 
