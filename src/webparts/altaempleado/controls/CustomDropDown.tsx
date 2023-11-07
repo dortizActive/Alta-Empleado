@@ -1,17 +1,15 @@
 import {
-  ContextualMenu, DefaultButton, Dialog, DialogFooter, DialogType, Dropdown, Icon,
-  IDropdownOption, IDropdownProps, PrimaryButton, Stack, TooltipHost
+ Dropdown, Icon,
+  IDropdownOption, IDropdownProps, Stack, TooltipHost
 } from '@fluentui/react';
 import { useConst, useId } from '@fluentui/react-hooks';
+
 import * as React from "react";
 import { useState } from "react";
 
 const CustomDropDown : React.FC<any> = (props) => {
   const [selected, setSelected] = useState({ key: null, text: null });
-  const [hideDialog, setHideDialog] = useState(true);
-  const [opcionactual, setOpcionActual] = useState<IDropdownOption>(null);
-  const labelId: string = useId('dialogLabel');
-  const subTextId: string = useId('subTextLabel');
+
   
   // eslint-disable-next-line
   const onClear = (event:any) => {
@@ -27,46 +25,17 @@ const CustomDropDown : React.FC<any> = (props) => {
   const onChange = ( 
     ev:any,
     option: IDropdownOption) : void => {
-    if(props.onChange){      
-      if(props.usedialogblocking)
-      {
-          setOpcionActual(option);
-         setHideDialog(false)
-      }
-      else{
-          props.onChange(ev,option);
-          setSelected(option);
-      }
-    }
+
   };  
 
  
   const tooltipId = useId('tooltip');
   const dropDownId = useId('targetDropDown');
 
-  const dialogContentProps = {
-    type: DialogType.normal,
-    title: "Confirmación",
-    subText: props.confirmationtext?props.confirmationtext:"Confirmación text"
-  };
 
-  const dialogStyles = { main: { maxWidth: 450 } };
-  const dragOptions = {
-    moveMenuItemText: 'Move',
-    closeMenuItemText: 'Close',
-    menu: ContextualMenu,
-    keepInBounds: true,
-  };
-  const modalProps = React.useMemo(
-    () => ({
-      titleAriaId: labelId,
-      subtitleAriaId: subTextId,
-      isBlocking: false,
-      styles: dialogStyles,
-      dragOptions: dragOptions,
-    }),
-    [labelId, subTextId],
-  );
+
+
+
 
 
   const calloutProps = useConst({
@@ -81,7 +50,8 @@ const CustomDropDown : React.FC<any> = (props) => {
   if(!props.multiSelect)
   {
     propsIfmultipleorsingle={  
-      options:props.options,  selectedKey:(props.selecteditem ==undefined)?selected.key:props.selecteditem
+      options: (props.options && props.options.length > 0) ? props.options : [],
+      selectedKey:(props.selecteditem ==undefined)?selected.key:props.selecteditem
     };
   }
   else{
@@ -94,89 +64,112 @@ const CustomDropDown : React.FC<any> = (props) => {
   }
 
   return (
-    <div className="active-control active-customdropdown">
+    
 
+<div className={`active-control active-customdropdown${props.className?" "+props.className:""}${props.labelPosition === 'Izquierda' ? ' flexDropdown' : ''}`}>
+     { props.labelPosition == "Izquierda" &&
+               <label className="boldtext">{props.label}</label>
+            }
+          <div   style={{ width: "-webkit-fill-available" }}>
+      
+          {props.OnlyText && (props.labelPosition === 'Izquierda') && (
+                <span className='active-solotexto'>
+                  {props.text}
+                </span>
+              )}
+
+{props.OnlyText && (props.labelPosition === '' || props.labelPosition == null) && (
+  <>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <label className='boldtextCheck'>{props.label}</label>
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <label className='displayMargincustomtextAbajo'>{props.text}</label>
+    </div>
+  </>
+)}
+      {!props.OnlyText &&
       <TooltipHost
         content={props.tooltip}
         id={tooltipId}
-        calloutProps={calloutProps}>
-          {props.options && props.options.length>0 &&
-      <Dropdown
-        id={dropDownId}
-        required={props.required}
-        label={props.label}
-        placeholder={props.placeholder}
-        style={{width:"100%"}}
-        styles={props.styles}
-        {...propsIfmultipleorsingle}
-        onChange={onChange}
-        disabled={props.disabled}
-        //defaultSelectedKey={props.selecteditem}
+        calloutProps={calloutProps}
       
-        onRenderCaretDown={(event) => {
-          return (
-            <Stack horizontal verticalAlign={"center"}>
-              {props.selecteditem && (
+        >
+          
+        {
+        // props.options && props.options.length > 0 &&
+        <Dropdown
+          id={dropDownId}
+          required={props.required}
+          label={props.labelPosition !== "Izquierda" ? props.label : ""}
+          placeholder={props.placeholder}
+          style={{width:"100%"}}
+          styles={props.styles}
+          {...propsIfmultipleorsingle}
+          onChange={onChange}
+          disabled={props.disabled}
+          //defaultSelectedKey={props.selecteditem}
+        
+          onRenderCaretDown={(event) => {
+            if (props.noX) {
+              return (
                 <Icon
-                  iconName={"Cancel"}
+                  iconName={"ChevronDown"}
                   styles={{
                     root: {
                       color: "rgb(96, 94, 92)",
-                      paddingRight: ".7em",
                       "&:hover": {
                         fontWeight: 800
                       }
                     }
                   }}
-                  onClick={(event) => {
-                    if(props.usedialogblocking)
-                    {
-                        setHideDialog(false);
-
-                    }else{
-                    event.stopPropagation();
-                    onClear(event);
-                    }
-                  }}
                 />
-              )}
-              <Icon
-                iconName={"ChevronDown"}
-                styles={{
-                  root: {
-                    color: "rgb(96, 94, 92)",
-                    "&:hover": {
-                      fontWeight: 800
-                    }
-                  }
-                }}                
-              />
-            </Stack>
-          );
-        }}/>
-        }
-      </TooltipHost>
-      {!hideDialog && props.usedialogblocking && 
-      <Dialog
-        hidden={hideDialog}
-        onDismiss={()=>{setHideDialog(true)}}
-        dialogContentProps={dialogContentProps}
-        modalProps={modalProps}
-      >
-        <DialogFooter>
-          <PrimaryButton onClick={()=>{setHideDialog(true);
-            if(opcionactual){
-              props.onChange(event,opcionactual);
-              setSelected(opcionactual);
-              setOpcionActual(null);
-            }else{
-              onClear(event);
+              );
+            } else {
+              return (
+                <Stack horizontal verticalAlign={"center"}>
+                  {props.selecteditem && (
+                    <Icon
+                      iconName={"Cancel"}
+                      styles={{
+                        root: {
+                          color: "rgb(96, 94, 92)",
+                          paddingRight: ".7em",
+                          "&:hover": {
+                            fontWeight: 800
+                          }
+                        }
+                      }}
+                      onClick={(event) => {
+                       
+                          event.stopPropagation();
+                          onClear(event);
+                        
+                      }}
+                    />
+                  )}
+                  <Icon
+                    iconName={"ChevronDown"}
+                    styles={{
+                      root: {
+                        color: "rgb(96, 94, 92)",
+                        "&:hover": {
+                          fontWeight: 800
+                        }
+                      }
+                    }}
+                  />
+                </Stack>
+              );
             }
-          }} text={"Si"} />
-          <DefaultButton onClick={()=>{setHideDialog(true)}}text={"No"} />
-        </DialogFooter>
-      </Dialog>
+          }}
+          />
+          }
+      </TooltipHost>
       }
+
+      </div>
+     
     </div>
   );
 };

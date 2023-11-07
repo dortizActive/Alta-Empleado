@@ -11,6 +11,15 @@ declare interface IAltaEmpladosWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   EmpleadosPanel: string;
+  Confirmacion: String;
+  ConfirmacionDescripcion: string;
+  Si: String;
+  No: string;
+  Procesando: String;
+  EspereSegundos: string;
+  Cerrar: string;
+
+
 }
 
 declare module 'AltaEmpladosWebPartStrings' {

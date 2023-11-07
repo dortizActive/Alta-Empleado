@@ -18,7 +18,7 @@ export interface IAltaempleadoProps {
 }
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import * as React from 'react';
-import {  ISelected} from './Repositories';
+import {  ISelected} from '../../../models/ShpInterfaces';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 

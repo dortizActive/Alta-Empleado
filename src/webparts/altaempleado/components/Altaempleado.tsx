@@ -9,9 +9,11 @@ import Form from 'react-bootstrap/Form';
 import CustomTextFieldError from '../controls/CustomTextFieldError';
 import CustomDropDown from '../controls/CustomDropDown';
 import { IAltaempleadoProps } from './IAltaempleadoProps';
-import { IAltaEmpleados, Repositories } from './Repositories';
+import { IAltaEmpleados } from '../../../models/ShpInterfaces';
+import { Repositories } from './Repositories';
 import { IDropdownOption, IDropdownStyles } from 'office-ui-fabric-react';
 import CustomTextField from '../controls/CustomTextField';
+import '../../../common/style/CommonStyle.module.scss';
 
 console.log(Utils.EsWorkbench());
 if (Utils.EsWorkbench()) {
@@ -128,24 +130,24 @@ const AltaEmplados: React.FC<IAltaempleadoProps> = (props) => {
 
 
 
-      repo.getSelected("Departamentos", urlWebadasasistemas),
+     /*  repo.getSelected("Departamentos", urlWebadasasistemas),
       repo.getSelected("Oficinas", urlwebMyNet),
       repo.getSelected("Ubicaciones", urlWebRRHH),
       repo.getSelected("Puesto de trabajo", url),
       repo.getSelected("categorias", urlWebadasa),
-      repo.getSelected("empresas",urlWebRRHH),
+      repo.getSelected("empresas",urlWebRRHH), */
   
     ])
       .then(results => {
         console.log("Entro Promise result");
         console.log(results);
       
-        setOptionCentros(repo.map2DropDownOption(results?.length > 0 ? results[0] : null));
+        /* setOptionCentros(repo.map2DropDownOption(results?.length > 0 ? results[0] : null));
         setOptionUbicacion(repo.map2DropDownOption(results?.length > 1 ? results[1] : null));
         setOptionPuesto(repo.map2DropDownOption(results?.length > 2 ? results[2] : null));
         setOptionCategoria(repo.map2DropDownOption(results?.length > 3 ? results[3] : null));
         setOptionDepartamento(repo.map2DropDownOption(results?.length > 4 ? results[4] : null));
-        setOptionEmpresas(repo.map2DropDownOption(results?.length > 5 ? results[5] : null));
+        setOptionEmpresas(repo.map2DropDownOption(results?.length > 5 ? results[5] : null)); */
         console.log("Todo correcto");
       
         console.log("Render OK");

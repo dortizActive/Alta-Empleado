@@ -12,5 +12,13 @@ define([], function() {
     "AppOfficeEnvironment": "The app is running in office.com",
     "AppOutlookEnvironment": "The app is running in Outlook",
     "EmpleadosPanel": "Nombre Empleado",
+    Confirmacion: "Confirmación",
+    ConfirmacionDescripcion: "Confirmación Descripción",
+    Si: "Sí",
+    No: "No",
+    Procesando: "Procesando",
+  EspereSegundos: "Espere unos Segundos",
+  Cerrar: "Cerrar",
+
   }
 });

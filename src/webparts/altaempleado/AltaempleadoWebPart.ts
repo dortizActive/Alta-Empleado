@@ -71,30 +71,9 @@ export default class AltaEmpladosWebPart extends BaseClientSideWebPart<IAltaempl
 
 
   private _getEnvironmentMessage(): Promise<string> {
-    console.log("Entro en esto _getEnvironmentMessage");
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
-      return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
-          switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
-            default:
-              throw new Error('Unknown host');
-          }
+   
 
-          return environmentMessage;
-        });
-    }
-
-    return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
+    return Promise.resolve("" ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
   }
 
   
@@ -107,9 +86,6 @@ export default class AltaEmpladosWebPart extends BaseClientSideWebPart<IAltaempl
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
-  protected get dataVersion(): Version {
-    return Version.parse('1.0');
-  }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {

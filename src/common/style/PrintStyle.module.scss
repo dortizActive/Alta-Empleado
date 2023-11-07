@@ -1,0 +1,184 @@
+
+:global{
+
+  @media print 
+    {
+
+      .labelDerechaImprimir{
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+      }
+      .widthIconPersanImprimir{
+        width: 49px !important;
+        vertical-align: middle;
+      }
+      .noMostrarImprimir {
+        display: none !important;
+      }
+    
+    .active-control.active-customdropdown i {
+        display: none !important;
+    }
+      
+     
+   
+      .tituloImprimir{
+        display: block !important;
+        position: fixed;
+        top: 5px;
+      }
+     
+      
+    
+      .ms-Grid-col{
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      
+      .boldtext{
+        max-width: fit-content !important;
+        margin-right: 0px !important;
+        // min-width: 30% !important;
+        min-width: 140px !important;
+        max-width: 37%  !important;
+    }
+      .boldtextDisplay{
+        max-width: fit-content !important;
+        margin-right: 0px !important;
+        min-width: 140px !important;
+        // min-width: 30% !important;
+        max-width: 37% !important;
+        margin-top: 0px !important;
+      }
+      .active-displayvalue-div{
+        margin-bottom: 20px !important;
+        margin-top: 0px !important;
+      }
+      .maginleftspan{
+        margin-left: 8px;
+      }
+      .boldtextDisplayNum{
+        width: 52% !important;
+      }
+      .boldtextNum{
+        width: 52% !important;
+      }
+      .widthUsoImprimir{
+        width: 80%;
+      }
+     
+      .MostrarImprimir{
+        display: block !important;
+      }
+     
+    .active-button,.active-projects-form .active-project-h i,.ms-MessageBar,.active-noprint,.active-noprint,.ms-Dropdown-caretDownWrapper,.active-table-general button,.active-table-general-bordered button, .msDatePickerDisabled, .ms-Dropdown-titleIsPlaceHolder{
+
+      display:none !important;
+      
+      } 
+
+      .active-projects-form table.active-table-general td,.active-projects-form table.active-table-general-bordered td
+      {
+          padding:4px;
+
+      }
+
+      .active-referencia table.active-table-general td,.active-referencia  table.active-table-general-bordered td
+      {
+          padding:1px;
+
+      }
+
+      .marginTopLabel{
+        margin-bottom: 10px;
+      }
+      .active-control {
+        margin-top: 5px !important;
+        width: 95% !important;
+    }
+    .active-proyectos-textboxes{
+      bottom: 5px !important;
+    }
+
+    
+      .is-disabled .ms-TextField-field {
+        background: white;
+        color: black;
+    }
+   
+     *[class*="text-"] {
+      border: none !important;
+     }
+
+      .is-disabled .ms-Dropdown-title {
+        background: white !important;        
+        color: black;
+    }
+   .ms-Button-icon {  
+    display: none !important;
+
+   }
+    *[class*="-control"] {
+     border-color: white;
+    }
+    *[class*="-placeholder"] {
+      display: none;
+     }
+     *[class*="-IndicatorsContainer"] {
+      display: none;
+     }
+     .ms-BasePicker-text{
+      border-color: white;
+     }
+     
+    
+      
+      .ms-Dropdown-title,.ms-TextField-fieldGroup {
+        border: none !important;
+    }
+
+    .active-referencia {
+      padding-top: 4px!important;
+      padding-bottom: 4px;
+    }
+
+      .active-projects-form{
+  
+        max-width:1100px;
+        margin: 0px 20px 20px 0px!important;
+        padding-bottom: 0px;
+        width: 97%;
+      }
+
+        table.active-table-general-bordered{
+            width:90%;
+        }
+
+        .active-parte-cabecera-right {
+          
+          min-width: 130px;
+      }
+
+      .active-celda-txb-btn{
+        min-width: 200px;
+      }
+
+      .active-customdropdown .ms-Dropdown-container>div {
+        max-width: auto !important;
+        bottom: 4px !important;
+    }
+    .MostrarImprimir{
+      display: block !important;
+    }
+
+    .ck-rounded-corners .ck.ck-toolbar, .ck.ck-toolbar.ck-rounded-corners {    
+      border: none!important;
+    }
+
+    .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {    
+      display: none!important;
+    }
+      }
+
+
+    }
